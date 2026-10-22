@@ -4,6 +4,7 @@ import LandingScreen from './components/LandingScreen'
 import SurpriseScreen from './components/SurpriseScreen'
 import FloatingParticles from './components/FloatingParticles'
 import SetupPanel from './components/SetupPanel'
+import BackgroundMusic from './components/BackgroundMusic'
 
 type Screen = 'landing' | 'surprise'
 
@@ -75,6 +76,8 @@ export default function App() {
           />
         )}
       </AnimatePresence>
+
+      <BackgroundMusic />
 
       {/* Setup Panel */}
       <SetupPanel

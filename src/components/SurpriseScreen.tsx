@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Heart, RefreshCw, ArrowLeft } from 'lucide-react'
 import PhotoSlider from './PhotoSlider'
+import { DEFAULT_SLIDES } from '../slides'
 
 interface SurpriseScreenProps {
   couplePhotoUrl: string | null
@@ -55,86 +56,12 @@ function HeartbeatPulse() {
   )
 }
 
-function CouplePhotoCard({ couplePhotoUrl }: { couplePhotoUrl: string | null }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24, rotate: -1 }}
-      animate={{ opacity: 1, y: 0, rotate: 0 }}
-      transition={{ duration: 0.9, delay: 0.3, type: 'spring', stiffness: 100 }}
-      className="relative mx-auto"
-      style={{ width: '100%', maxWidth: 360 }}
-    >
-      {/* Polaroid card */}
-      <div
-        className="rounded-2xl overflow-hidden w-full"
-        style={{
-          background: '#fff',
-          padding: '12px 12px 44px 12px',
-          boxShadow:
-            '0 16px 60px rgba(0,0,0,0.13), 0 4px 20px rgba(244,63,94,0.18), 0 0 0 1px rgba(0,0,0,0.04)',
-        }}
-      >
-        {/* Photo area */}
-        <div
-          className="rounded-xl overflow-hidden w-full"
-          style={{
-            aspectRatio: '4/3',
-            background: 'linear-gradient(135deg, #ffe4ea, #fecdd3)',
-          }}
-        >
-          {couplePhotoUrl ? (
-            <img
-              src={couplePhotoUrl}
-              alt="Our couple photo"
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div className="flex flex-col items-center justify-center gap-3 p-8 text-center w-full h-full">
-              <div
-                className="w-16 h-16 rounded-full flex items-center justify-center"
-                style={{ background: 'rgba(244,63,94,0.1)' }}
-              >
-                <ImageIcon size={28} className="text-rose-400" />
-              </div>
-              <p className="text-sm text-rose-300 leading-relaxed">
-                Add your couple photo using the{' '}
-                <strong className="text-rose-400">Setup Photos</strong> button
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Polaroid caption */}
-        <div className="pt-3 text-center">
-          <p
-            style={{
-              fontFamily: 'Dancing Script, cursive',
-              color: '#9f1239',
-              fontSize: '1.05rem',
-            }}
-          >
-            us, always &amp; forever
-          </p>
-        </div>
-      </div>
-
-      {/* Heart stickers */}
-      <motion.div
-        className="absolute -top-2 -right-2 z-10"
-        animate={{ rotate: [0, 10, -10, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <Heart size={22} fill="#f43f5e" className="text-rose-500" />
-      </motion.div>
-      <motion.div
-        className="absolute -bottom-1 -left-1 z-10"
-        animate={{ rotate: [0, -8, 8, 0] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-      >
-        <Heart size={15} fill="#fda4af" className="text-rose-300" />
-      </motion.div>
-    </motion.div>
-  )
+function slidesFor(couplePhotoUrl: string | null) {
+  if (!couplePhotoUrl || couplePhotoUrl === '/couple.jpg') return DEFAULT_SLIDES
+  return [
+    { src: couplePhotoUrl, caption: 'us, always & forever' },
+    ...DEFAULT_SLIDES.filter((slide) => slide.src !== '/couple.jpg'),
+  ]
 }
 
 function AnimatedMessage({ replay }: { replay: number }) {
@@ -261,9 +188,9 @@ export default function SurpriseScreen({ couplePhotoUrl, onBack }: SurpriseScree
             </motion.h1>
           </motion.div>
 
-          {/* Couple photo — centred */}
-          <div className="w-full flex justify-center mb-10">
-            <CouplePhotoCard couplePhotoUrl={couplePhotoUrl} />
+          {/* Photo slides — centred */}
+          <div className="w-full flex justify-center mb-10 px-7">
+            <PhotoSlider slides={slidesFor(couplePhotoUrl)} />
           </div>
 
           {/* Divider */}

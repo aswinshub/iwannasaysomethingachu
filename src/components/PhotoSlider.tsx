@@ -1,16 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Heart, ChevronLeft, ChevronRight } from 'lucide-react'
-
-// Default slides baked in — user can still override via Setup Photos
-const DEFAULT_SLIDES = [
-  { src: '/couple.jpg',  caption: 'us, always & forever' },
-  { src: '/slide1.jpg',  caption: 'every moment with you ✨' },
-  { src: '/slide2.jpg',  caption: 'our little world 💫' },
-  { src: '/slide3.jpg',  caption: 'together is my favourite place 🌸' },
-  { src: '/slide4.jpg',  caption: 'laughing with you ❤️' },
-  { src: '/slide5.jpg',  caption: 'you & me, always 💕' },
-]
+import { DEFAULT_SLIDES } from '../slides'
 
 const swipeVariants = {
   enter: (dir: number) => ({
@@ -89,7 +80,7 @@ export default function PhotoSlider({
         {/* Photo viewport — clips the sliding images */}
         <div
           className="rounded-xl overflow-hidden w-full relative"
-          style={{ aspectRatio: '4/3', background: '#fde8ed' }}
+          style={{ aspectRatio: '3/4', background: '#fde8ed' }}
         >
           <AnimatePresence initial={false} custom={dir} mode="popLayout">
             <motion.img
@@ -102,7 +93,7 @@ export default function PhotoSlider({
               animate="center"
               exit="exit"
               transition={{ duration: 0.45, ease: [0.32, 0, 0.67, 0] }}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-contain"
               draggable={false}
             />
           </AnimatePresence>
