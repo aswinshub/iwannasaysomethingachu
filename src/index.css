@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-blush-50: #fff5f7;
+  --color-blush-100: #ffe4ea;
+  --color-blush-200: #ffc8d5;
+  --color-blush-300: #ff9db4;
+  --color-blush-400: #ff6b8e;
+  --color-blush-500: #f93a6a;
+  --color-blush-600: #e01850;
+  --color-blush-700: #bc1042;
+  --color-blush-800: #9d123b;
+  --color-blush-900: #861437;
+
+  --color-cream-50: #fffef9;
+  --color-cream-100: #fef9ee;
+  --color-cream-200: #fdf0d5;
+  --color-cream-300: #fae2b0;
+  --color-cream-400: #f6cc7f;
+  --color-cream-500: #f0b053;
+
+  --color-rose-50: #fff1f2;
+  --color-rose-100: #ffe4e6;
+  --color-rose-200: #fecdd3;
+  --color-rose-300: #fda4af;
+  --color-rose-400: #fb7185;
+  --color-rose-500: #f43f5e;
+  --color-rose-600: #e11d48;
+  --color-rose-700: #be123c;
+  --color-rose-800: #9f1239;
+  --color-rose-900: #881337;
+
+  --color-burgundy-50: #fdf2f4;
+  --color-burgundy-100: #fbe5e9;
+  --color-burgundy-200: #f7cbd4;
+  --color-burgundy-300: #f09bb0;
+  --color-burgundy-400: #e56384;
+  --color-burgundy-500: #d63d63;
+  --color-burgundy-600: #c12b50;
+  --color-burgundy-700: #a12242;
+  --color-burgundy-800: #7f1f39;
+  --color-burgundy-900: #5e1c31;
+
+  --font-playfair: 'Playfair Display', serif;
+  --font-lato: 'Lato', sans-serif;
+  --font-dancing: 'Dancing Script', cursive;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-lato);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #fdf2f4;
+}
+::-webkit-scrollbar-thumb {
+  background: #f09bb0;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e56384;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
